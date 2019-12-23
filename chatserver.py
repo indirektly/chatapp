@@ -13,7 +13,6 @@ def main():
     if len(sys.argv) != 3: 
         print("Need args (in order): IP address, port number")
         exit()
-    
     #Sets the arguements to IP and port, then binds them to the socket/server
     IP_address = str(sys.argv[1])
     Port = int(sys.argv[2])
@@ -21,10 +20,11 @@ def main():
     
     #Max number of connections allowed
     server.listen(100)
-    
     #Used for keeping track of clients for certain reasons such as broadcasting
     list_of_clients = []
     clientNames = {}
+
+
     def clientthread(conn, addr): 
   
         # sends a message to the client whose user object is conn 
@@ -85,7 +85,7 @@ def main():
 
         list_of_clients.append(conn) 
     
-        #prints the adds of user that connected 
+        #prints the addr of user that connected 
         print(addr[0] + " connected")
         clientNames[addr[0]] = str(addr[0])
         #creates individual thread for every unique user  
