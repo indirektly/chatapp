@@ -41,16 +41,16 @@ def main():
                     if message: 
     
                         #Attempt at using custom name
-                        if(message.split()[0] == '!setname'):
-                            clientNames[addr[0]] = message.split()[1]
+                        if(message.split()[0] == b'!setname'):
+                            clientNames[addr[0]] = str(message.split()[1])
                             #For testing custom names
                             #print(str(clientNames))
                         else:
                             #Logs text from users
                             #Seems to not work...?
-                            print(addr[0] + ": " + message)
+                            print(clientNames[addr[0]] + ": " + str(message))
                             #Creates message and sends to all connections 
-                            message_to_send = clientNames[addr[0]] + ": " + message 
+                            message_to_send = str.encode(clientNames[addr[0]] + ": " + message)
                             broadcast(message_to_send, conn) 
     
                     else: 
@@ -82,7 +82,7 @@ def main():
     #Looks for active conncetions and accepts
     while True:
         conn, addr = server.accept() 
-
+        print(str(conn.getsockname()[0]))
         list_of_clients.append(conn) 
     
         #prints the addr of user that connected 
